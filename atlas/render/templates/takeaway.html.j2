@@ -1,0 +1,19 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{# Final takeaway: the bottom line, what to watch with dates, and the full source list. #}
+{% block css %}
+.watch{display:grid;grid-template-columns:200px 1fr;border-top:1px solid var(--line2)}
+.watch>div{padding:18px 0;border-bottom:1px solid var(--line2);font-size:27px;line-height:1.35}
+.watch .dt{font-size:20px;color:var(--accent);padding-top:22px}
+.srcs{font-size:17px;color:var(--muted);line-height:1.6}
+.srcs b{color:var(--fg);font-weight:500}
+{% endblock %}
+{% block body %}
+{{ m.header(story, slide) }}
+<div style="margin-top:52px"><div class="kicker mono">▍ {{ slide.kicker or 'BOTTOM LINE' }}</div>
+<div class="display" data-fit="330" data-min="56" style="font-size:96px">{{ slide.statement | hl }}</div></div>
+{% if slide.watch %}<div class="mono" style="margin-top:44px;font-size:20px;color:var(--muted)">WHAT TO WATCH</div>
+<div class="watch" style="margin-top:12px">{% for w in slide.watch %}<div class="dt mono">{{ w.date }}</div><div>{{ w.item }}</div>{% endfor %}</div>{% endif %}
+<div class="srcs mono" style="margin-top:auto;padding-top:28px">{% for s in story._sources %}<div><b>[{{ loop.index }}]</b> {{ s.publisher }}, {{ s.title }}. {{ s.url_short }}{% if s.retrieved %} · retrieved {{ s.retrieved }}{% endif %}</div>{% endfor %}</div>
+<div class="foot"><div class="mono">{{ story.disclaimer }}</div><div class="nav mono">{{ story.handle }}</div></div>
+{% endblock %}

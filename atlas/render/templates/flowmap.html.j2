@@ -1,0 +1,11 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{# Global capital flows: ribbons from origin to destination, widths proportional to the sourced values. #}
+{% block body %}
+{{ m.header(story, slide) }}
+<div style="margin-top:52px"><div class="kicker mono">▍ {{ slide.kicker or 'FOLLOW THE MONEY' }}</div><h2 data-fit="160" data-min="52">{{ slide.title | hl }}</h2></div>
+<div class="mono" style="display:flex;justify-content:space-between;margin-top:40px;font-size:18px;color:var(--muted)"><span>{{ slide.left_label or 'FROM' }}</span><span>{{ slide.unit_label }}</span><span>{{ slide.right_label or 'TO' }}</span></div>
+<div style="margin-top:18px">{{ slide._flows | safe }}</div>
+{% if slide.note %}<p style="margin-top:26px;font-size:28px;line-height:1.4">{{ slide.note | hl }}</p>{% endif %}
+{{ m.footer(slide) }}
+{% endblock %}

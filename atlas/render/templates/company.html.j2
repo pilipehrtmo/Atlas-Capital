@@ -1,0 +1,23 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{# Company and industry analysis: identity line, a metric grid, and a ranked segment bar chart. #}
+{% block css %}
+.co{display:flex;align-items:baseline;gap:22px}
+.co .name{font-family:'Barlow Condensed';font-weight:700;font-size:58px;text-transform:uppercase}
+.co .tk{font-size:22px;color:var(--bg);background:var(--fg);padding:4px 10px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line2)}
+.metrics>div{padding:22px 0 20px;border-bottom:1px solid var(--line2)}
+.metrics>div:not(:nth-child(3n+1)){padding-left:24px;border-left:1px solid var(--line2)}
+.metrics .l{font-size:17px;color:var(--muted)}
+.metrics .v{font-family:'Barlow Condensed';font-weight:600;font-size:60px;line-height:1.05}
+.metrics .d{font-size:18px}
+{% endblock %}
+{% block body %}
+{{ m.header(story, slide) }}
+<div style="margin-top:46px" class="co"><span class="name">{{ slide.company.name }}</span>{% if slide.company.ticker %}<span class="tk mono">{{ slide.company.ticker }}</span>{% endif %}{% if slide.company.period %}<span class="mono" style="font-size:20px;color:var(--muted)">{{ slide.company.period }}</span>{% endif %}</div>
+<h2 style="margin-top:18px;font-size:66px" data-fit="140" data-min="48">{{ slide.title | hl }}</h2>
+<div class="metrics" style="margin-top:36px">{% for x in slide.metrics %}<div><div class="l mono">{{ x.label }}</div><div class="v">{{ x.value }}</div>{% if x.delta %}<div class="d mono {{ 'risk' if x.tone == 'risk' else 'hl' }}">{{ x.delta }}</div>{% endif %}</div>{% endfor %}</div>
+{% if slide._segments %}<div class="mono" style="margin-top:40px;font-size:18px;color:var(--muted)">{{ slide.segments.title }}</div><div style="margin-top:12px">{{ slide._segments | safe }}</div>{% endif %}
+{% if slide.note %}<p style="margin-top:26px;font-size:28px;line-height:1.4">{{ slide.note | hl }}</p>{% endif %}
+{{ m.footer(slide) }}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% macro header(story, slide) -%}
+<div class="grid"></div>
+<div class="top"><div class="brand"><i></i>ATLAS</div>
+<div class="tag mono"><b>{{ slide.section or story.section }}</b> &nbsp;{{ '%02d' % slide._index }}/{{ '%02d' % slide._total }}</div></div>
+<div class="meta mono"><span>{{ story.date_label }}</span><span>{{ slide.topic or story.topic }}</span></div>
+{%- endmacro %}
+
+{% macro footer(slide, nav='→') -%}
+<div class="foot"><div class="mono">{{ slide._footnote | safe }}</div><div class="nav mono">{{ nav }}</div></div>
+{%- endmacro %}

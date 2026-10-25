@@ -1,0 +1,161 @@
+{
+ "story_id": "template-gallery",
+ "date": "2026-10-25",
+ "section": "MARKETS",
+ "topic": "TEMPLATE GALLERY",
+ "sample": true,
+ "sources": [
+  {
+   "id": "sample",
+   "publisher": "ATLAS layout sample",
+   "short": "Sample values, not real data",
+   "title": "Placeholder values for template testing",
+   "url": "https://example.com/sample",
+   "retrieved": "2026-10-25",
+   "note": "Not for publication"
+  }
+ ],
+ "slides": [
+  {
+   "template": "cover",
+   "sources": [
+    "sample"
+   ],
+   "kicker": "Photo cover",
+   "headline": "A hook headline\nwith a **highlight**",
+   "photo": {
+    "path": "assets/test-photo.jpg",
+    "credit": "generated test image"
+   },
+   "cta": "SWIPE",
+   "top": 110
+  },
+  {
+   "template": "company",
+   "sources": [
+    "sample"
+   ],
+   "company": {
+    "name": "Example Corp",
+    "ticker": "EXMP",
+    "period": "FY SAMPLE"
+   },
+   "title": "Where the money comes from, and where it goes",
+   "metrics": [
+    {
+     "label": "REVENUE",
+     "value": "$10.0B",
+     "delta": "\u25b2 12% Y/Y"
+    },
+    {
+     "label": "OPERATING MARGIN",
+     "value": "24%",
+     "delta": "\u25bc 2 PTS",
+     "tone": "risk"
+    },
+    {
+     "label": "CAPEX",
+     "value": "$3.1B",
+     "delta": "\u25b2 40% Y/Y"
+    },
+    {
+     "label": "FREE CASH FLOW",
+     "value": "$1.2B",
+     "delta": "\u25bc 18% Y/Y",
+     "tone": "risk"
+    },
+    {
+     "label": "NET CASH",
+     "value": "$4.5B"
+    },
+    {
+     "label": "BUYBACKS",
+     "value": "$0.8B"
+    }
+   ],
+   "segments": {
+    "title": "REVENUE BY SEGMENT, $B",
+    "unit": "",
+    "highlight": "Data centers",
+    "rows": [
+     [
+      "Data centers",
+      5.2
+     ],
+     [
+      "Consumer",
+      2.6
+     ],
+     [
+      "Industrial",
+      1.4
+     ],
+     [
+      "Other",
+      0.8
+     ]
+    ]
+   },
+   "note": "Layout sample: metric grid plus a ranked segment chart."
+  },
+  {
+   "template": "flowmap",
+   "sources": [
+    "sample"
+   ],
+   "title": "Follow the money: where the inflows went",
+   "unit": "",
+   "unit_label": "USD BN, SAMPLE",
+   "left_label": "ORIGIN",
+   "right_label": "DESTINATION",
+   "flows": [
+    {
+     "from": "Japan",
+     "to": "US Treasuries",
+     "value": 40,
+     "highlight": true
+    },
+    {
+     "from": "Japan",
+     "to": "EM debt",
+     "value": 12
+    },
+    {
+     "from": "Europe",
+     "to": "US Treasuries",
+     "value": 25
+    },
+    {
+     "from": "Europe",
+     "to": "US equities",
+     "value": 30
+    },
+    {
+     "from": "Gulf",
+     "to": "US equities",
+     "value": 18
+    },
+    {
+     "from": "Gulf",
+     "to": "EM debt",
+     "value": 9
+    }
+   ],
+   "note": "Ribbon width is proportional to each sourced value."
+  },
+  {
+   "template": "story",
+   "sources": [
+    "sample"
+   ],
+   "kicker": "Story cover",
+   "headline": "Vertical cover\nfor **Stories and Reels**",
+   "photo": {
+    "path": "assets/test-photo.jpg",
+    "credit": "generated test image",
+    "position": "center bottom"
+   },
+   "top": 200
+  }
+ ]
+}
