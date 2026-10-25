@@ -1,0 +1,30 @@
+{% extends "base.html.j2" %}
+{% import "_macros.html.j2" as m %}
+{# Macro explainer: a 2-4 step flow, numbered points, optional callout for open questions. #}
+{% block css %}
+.node{border:1.5px solid var(--fg);padding:22px 24px;flex:0 0 auto;background:var(--panel)}
+.node.em{border-color:var(--accent)}
+.node .s{font-size:17px;color:var(--muted)}
+.node .n{font-family:'Barlow Condensed';font-weight:600;font-size:40px;line-height:1.02;margin-top:6px}
+.node.em .n{color:var(--accent)}
+.arrow{flex:1;min-width:24px;height:2px;background:var(--muted);position:relative}
+.arrow::after{content:"▶";position:absolute;right:-3px;top:-11px;color:var(--muted);font-size:20px}
+.points{display:grid;grid-template-columns:76px 1fr;row-gap:26px;font-size:30px;line-height:1.38}
+.points .i{font-size:24px;padding-top:6px}
+{% endblock %}
+{% block body %}
+{{ m.header(story, slide) }}
+<div style="margin-top:52px"><div class="kicker mono">▍ {{ slide.kicker or 'HOW IT WORKS' }}</div><h2 data-fit="160" data-min="52">{{ slide.title | hl }}</h2></div>
+{% if slide.flow %}
+{% set nw = (936 - 48 * (slide.flow|length - 1)) // slide.flow|length - 4 %}
+<div style="margin-top:44px;display:flex;align-items:center">
+{% for n in slide.flow %}{% if not loop.first %}<div class="arrow"></div>{% endif %}<div class="node {{ 'em' if n.emphasis else '' }}" style="width:{{ [nw, 268]|min }}px"><div class="s mono">{{ n.sub }}</div><div class="n">{{ n.label }}</div></div>{% endfor %}
+</div>
+{% if slide.flow_caption %}<div class="mono" style="display:flex;justify-content:space-between;margin-top:14px;font-size:17px;color:var(--muted)"><span>{{ slide.flow_caption[0] }}</span><span>{{ slide.flow_caption[1] }}</span></div>{% endif %}
+{% endif %}
+<div class="points" style="margin-top:44px">
+{% for p in slide.points %}<div class="i mono hl">{{ '%02d' % loop.index }}</div><div>{{ p | hl }}</div>{% endfor %}
+</div>
+{% if slide.callout %}<div class="callout {{ 'ok' if slide.callout.tone == 'ok' else '' }}" style="margin-top:36px"><span class="mono">{{ slide.callout.tag }}</span><br>{{ slide.callout.text }}</div>{% endif %}
+{{ m.footer(slide) }}
+{% endblock %}

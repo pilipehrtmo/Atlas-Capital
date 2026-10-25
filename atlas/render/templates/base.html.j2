@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>ATLAS {{ slide.template }}</title>
+<style>
+{{ font_faces }}
+{{ root_css }}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:{{ W }}px;height:{{ H }}px;background:var(--bg);color:var(--fg);overflow:hidden}
+body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+.slide{position:relative;width:{{ W }}px;height:{{ H }}px;padding:64px 72px;display:flex;flex-direction:column;overflow:hidden}
+.grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:72px 72px;background-position:-1px -1px}
+.grid::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(9,11,13,.55),rgba(9,11,13,.92) 75%)}
+.slide>*:not(.grid):not(.photo):not(.sample){position:relative;z-index:2}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.display{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-.005em}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:2px solid var(--fg)}
+.brand{display:flex;align-items:center;gap:14px;font-family:'Barlow Condensed';font-weight:700;font-size:40px;letter-spacing:.14em}
+.brand i{display:block;width:22px;height:22px;background:var(--accent)}
+.tag{font-size:21px;color:var(--muted)}
+.tag b{color:var(--accent);font-weight:500}
+.meta{display:flex;justify-content:space-between;padding-top:16px;font-size:19px;color:var(--muted)}
+.kicker{font-size:22px;color:var(--accent);margin-bottom:22px}
+h2{font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;line-height:.98;font-size:76px}
+.hl{color:var(--accent)}
+.risk{color:var(--risk)}
+.dek{font-size:33px;line-height:1.36;max-width:900px}
+.dek .q{color:var(--muted)}
+.foot{margin-top:auto;padding-top:18px;border-top:1px solid var(--line2);display:flex;justify-content:space-between;align-items:flex-end;gap:40px;font-size:17px;color:var(--muted);line-height:1.5}
+.foot b{color:var(--fg);font-weight:500}
+.foot .nav{color:var(--fg);white-space:nowrap;font-size:19px}
+.legend{display:flex;gap:30px;font-size:18px}
+.legend i{display:inline-block;width:26px;height:4px;vertical-align:middle;margin-right:10px}
+.callout{padding:20px 26px;border-left:4px solid var(--risk);background:rgba(255,91,97,.06);font-size:24px;line-height:1.45}
+.callout.ok{border-color:var(--accent);background:rgba(199,255,53,.05)}
+.callout .mono{font-size:18px;color:var(--risk)}
+.callout.ok .mono{color:var(--accent)}
+.sample{position:absolute;top:0;left:0;right:0;height:30px;background:var(--risk);color:var(--bg);font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:9;letter-spacing:.12em}
+{% block css %}{% endblock %}
+</style></head>
+<body><div class="slide {{ slide.template }}">{% block body %}{% endblock %}{% if story.sample %}<div class="sample mono">SAMPLE DATA · NOT FOR PUBLICATION</div>{% endif %}</div>
+<script>
+// Shrink any [data-fit] element until it fits inside its max height (px). Copy length varies per story.
+document.fonts.ready.then(() => {
+  for (const el of document.querySelectorAll('[data-fit]')) {
+    const max = +el.dataset.fit, min = +(el.dataset.min || 40);
+    let size = parseFloat(getComputedStyle(el).fontSize);
+    while (el.scrollHeight > max && size > min) { size -= 2; el.style.fontSize = size + 'px'; }
+  }
+  document.body.dataset.ready = '1';
+});
+</script></body></html>

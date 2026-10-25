@@ -1,0 +1,31 @@
+[project]
+name = "atlas"
+version = "0.1.0"
+description = "ATLAS: financial intelligence media pipeline"
+requires-python = ">=3.11"
+dependencies = [
+  "jinja2>=3.1",
+  "markupsafe>=2.1",
+  "pillow>=10",
+  "playwright>=1.45",
+  "pyyaml>=6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+atlas = "atlas.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["atlas*"]
+
+[tool.setuptools.package-data]
+atlas = ["assets/fonts/*", "render/templates/*.j2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
